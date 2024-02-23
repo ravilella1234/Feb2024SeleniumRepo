@@ -1,5 +1,6 @@
 package icici.loans.personalloans;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ExceptionDemo 
@@ -24,10 +25,14 @@ public class ExceptionDemo
 				System.out.println("Result is : " + result);
 				break;
 			} 
-			catch (ArithmeticException e) 
+			catch (Exception e) 
 			{
 				e.printStackTrace();
-			} 
+			}
+			finally 
+			{
+				System.out.println("iam final Block...");
+			}
 		}
 	}
 
