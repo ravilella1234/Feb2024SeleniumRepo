@@ -16,7 +16,7 @@ public class TC_002 extends BaseTest
 		
 		selectOption("amazonsearchdropbox_id","Books");
 		
-		typeText("amazonsearchtext_id","Harry Potter");
+		typeText("amazonsearchtext_name","Harry Potter");
 		
 		clickElement("amazonserachbutton_xpath");
 		
