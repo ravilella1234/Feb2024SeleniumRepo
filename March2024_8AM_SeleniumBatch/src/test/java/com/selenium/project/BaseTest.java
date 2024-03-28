@@ -126,16 +126,20 @@ public class BaseTest
 	public static boolean isElementPresence(String locatorKey) 
 	{
 		System.out.println("Checking for element presence :" + locatorKey);
+				
 		
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		if(wait.until(ExpectedConditions.presenceOfElementLocated(getLocator(locatorKey))) != null)
+			try 
+			{
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+				wait.until(ExpectedConditions.presenceOfElementLocated(getLocator(locatorKey)));
+				return true;
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				return false;
+			}
 			
-			return true;
-		else
-			System.out.println("Hi");
-			return false;
-		
-		
 		/*if(locatorKey.endsWith("_id")) {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(orProp.getProperty(locatorKey))));
 	}else if(locatorKey.endsWith("_name")) {
