@@ -3,20 +3,25 @@ package com.selenium.project;
 import java.io.File;
 import java.io.FileInputStream;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -110,7 +115,8 @@ public class BaseTest
 		//check for element presence
 		if(!isElementPresence(locatorKey))
 			//report as failure
-			System.out.println("Element is not present :" + locatorKey);
+			//System.out.println("Element is not present :" + locatorKey);
+			test.log(Status.FAIL, "Element is not present :" + orProp.getProperty(locatorKey));
 		
 		element = driver.findElement(getLocator(locatorKey));
 		
@@ -192,6 +198,37 @@ public class BaseTest
 		
 		return by;
 		
+	}
+	
+	public static boolean isLinkEqual(String expectedLink) 
+	{
+		String actuallink = driver.findElement(By.linkText("Customer Service")).getText();
+		if(!expectedLink.equals(actuallink))
+			return false;
+		else
+			return true;
+	}
+	
+	public static void reportPass(String passMessage) 
+	{
+		test.log(Status.PASS, passMessage);
+	}
+
+	public static void reportFailure(String failMessage) throws Exception 
+	{
+		test.log(Status.FAIL, failMessage);
+		takesScreenshot();
+	}
+	
+	public static void takesScreenshot() throws Exception
+	{
+		Date dt=new Date();
+		System.out.println(dt);
+		String dateFormat=dt.toString().replace(":", "_").replace(" ", "_")+".png";		
+		File scrFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		FileHandler.copy(scrFile, new File(System.getProperty("user.dir")+"//failurescreenshots//"+dateFormat));
+		
+		test.log(Status.INFO,"Screenshot --->" +test.addScreenCaptureFromPath(System.getProperty("user.dir")+"//failurescreenshots//"+dateFormat));
 	}
 
 }
