@@ -24,11 +24,6 @@ public class Verify3 extends BaseTest
 		else
 			reportPass("Both links are equal...");
 				
-		report.flush();
-		
-	}
-
-	
-
-	
+		report.flush();	
+	}	
 }
