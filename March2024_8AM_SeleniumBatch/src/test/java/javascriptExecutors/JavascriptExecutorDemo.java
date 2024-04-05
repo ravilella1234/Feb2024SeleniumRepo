@@ -18,6 +18,10 @@ public class JavascriptExecutorDemo
 		
 		JavascriptExecutor js = (JavascriptExecutor)driver;
 		js.executeScript("document.getElementById('email').value='ravilella'");
+		String val = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println(val);
+		
+		js.executeScript("document.getElementById('email')");
 		
 		String title = js.executeScript("return document.title").toString();
 		System.out.println(title);
