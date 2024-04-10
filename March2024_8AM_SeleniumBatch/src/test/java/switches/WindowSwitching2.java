@@ -14,6 +14,12 @@ public class WindowSwitching2
 {
 	public static WebDriver driver;
 
+	public static void switchToParentWindow(String parentWindow)
+	{
+		driver.switchTo().window(parentWindow);
+	}
+	
+	
 	public static Boolean switchToRightWindow(String windowTitle, List<String> hList)
 	{
 		for(String e : hList)
@@ -28,6 +34,20 @@ public class WindowSwitching2
 		return false;
 	}
 	
+	//How to close all child Windows and switch back to parent Windows
+	public static void closeAllWindows(List<String> hList,String parentWindow)
+	{
+		for(String e :hList)
+		{
+			//p1
+			//p1,c1,c2,c3,c4
+			
+			if(!e.equals(parentWindow))
+			{
+				driver.switchTo().window(e).close();
+			}
+		}
+	}
 	
 	public static void main(String[] args) 
 	{
@@ -54,6 +74,9 @@ public class WindowSwitching2
 			System.out.println(driver.getCurrentUrl() + ":" + driver.getTitle());
 		}
 		
-		//How to close all child Windows and switch back to parent Windows
+		closeAllWindows(hList, parentWindow);
+		switchToParentWindow(parentWindow);
+		System.out.println(driver.getCurrentUrl() + ":" + driver.getTitle());
+		
 	}
 }
