@@ -1,0 +1,11 @@
+How to handle the Alerts?
+-------------------------
+1) Java script Alerts
+      Java script Alerts
+      Prompt Alerts
+      Confirmation Dialog Alerts
+2) Authentication Popup
+3) Push Notifications
+4) Bootstrap Modal Dialogs
+5) Handling Lightbox
+6) Accept Cookies
