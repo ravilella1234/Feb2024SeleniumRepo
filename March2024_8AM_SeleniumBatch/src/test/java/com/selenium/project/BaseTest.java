@@ -72,13 +72,13 @@ public class BaseTest
 	
 	public static void launch(String browserType)
 	{
-		if(p.getProperty(browserType).equals("chrome")) {
+		if(browserType.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
-		}else if(p.getProperty(browserType).equals("firefox")) {
+		}else if(browserType.equals("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
-		}else if(p.getProperty(browserType).equals("edge")) {
+		}else if(browserType.equals("edge")) {
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
 		}
