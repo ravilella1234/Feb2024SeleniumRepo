@@ -3,12 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testng.TestUser">
+      <class name="excelDataDriven.DataManagementwithDataProvider">
         <methods>
-          <include name="createUser"/>
-          <include name="deleteUser"/>
+          <include name="f"/>
         </methods>
-      </class> <!-- testng.TestUser -->
+      </class> <!-- excelDataDriven.DataManagementwithDataProvider -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
