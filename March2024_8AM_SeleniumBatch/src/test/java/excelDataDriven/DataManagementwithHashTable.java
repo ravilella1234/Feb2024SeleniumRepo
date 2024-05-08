@@ -1,13 +1,16 @@
 package excelDataDriven;
 
 import org.testng.annotations.Test;
+
+import java.util.Hashtable;
+
 import org.testng.annotations.DataProvider;
 
-public class DataManagementwithDataProvider 
+public class DataManagementwithHashTable 
 {
 	
   @Test(dataProvider = "getData")
-  public void f(String RunMode, String Browser,String UserName,String UserPassword,String ExpectedResult) 
+  public void f(Hashtable<String, String> str) 
   {
 	  
   }
@@ -15,9 +18,9 @@ public class DataManagementwithDataProvider
   @DataProvider
   public Object[][] getData() throws Exception 
   {
-	  	ExcelAPI e = new ExcelAPI("C:\\Users\\ravi\\Desktop\\suitex.xlsx");
+	  ExcelAPI e = new ExcelAPI("C:\\Users\\ravi\\Desktop\\suitex.xlsx");
 		String sheetName = "data";
-		String testName = "TestA";
+		String testName = "TestB";
 		
 		//To find the matching testcase row number
 		int testStartRowNum = 0;
@@ -48,14 +51,20 @@ public class DataManagementwithDataProvider
 		
 		//Read the test Data
 		int dataRow = 0;
-		Object[][] data = new Object[rows][cols];
+		Hashtable<String, String> table = null;
+		Object[][] data = new Object[rows][1];
 		for(int rNum=dataStartRowNum;rNum<dataStartRowNum+rows;rNum++)
 		{
+			table = new Hashtable<String, String>();
 			for(int cNum=0;cNum<cols;cNum++)
 			{
 				//System.out.println(e.getCellData(sheetName, cNum, rNum));
-				data[dataRow][cNum] = e.getCellData(sheetName, cNum, rNum);
+				//data[dataRow][cNum] = e.getCellData(sheetName, cNum, rNum);
+				String key = e.getCellData(sheetName, cNum, colStartRowNum);
+				String value = e.getCellData(sheetName, cNum, rNum);
+				table.put(key, value);
 			}
+			data[dataRow][0] = table;
 			dataRow++;
 		}
 		return data;
